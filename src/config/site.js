@@ -1,0 +1,38 @@
+export const site = {
+  name: 'Clément Lorieau',
+  title: 'Clément Lorieau | Développeur Fullstack Web & Mobile',
+  description:
+    'Portfolio de Clément Lorieau, développeur fullstack web et mobile. Étudiant en Master 2 Informatique, à la recherche d\'un stage de fin d\'études à partir de février 2027.',
+  logo: { src: '/logos/logo-blanc.png', width: 416, height: 457, alt: 'Logo Clément Lorieau' },
+  role: 'Développeur Fullstack',
+  roleDetail: 'Web & Mobile',
+  location: 'Agen, France',
+  availability: 'Stage de fin d\'études - février 2027 - 5 à 6 mois',
+  scrollHint: 'Défiler',
+  loader: {
+    label: 'Chargement du globe',
+    done: 'Prêt',
+  },
+  nav: [
+    { id: 'accueil', label: 'Accueil', index: '01' },
+    { id: 'voyage', label: 'Voyage', index: '02' },
+    { id: 'competences', label: 'Compétences', index: '03' },
+    { id: 'projets', label: 'Projets', index: '04' },
+  ],
+  contact: {
+    eyebrow: 'Et maintenant ?',
+    title: 'Construisons quelque chose ensemble.',
+    text: 'Je cherche un stage de fin d\'études de 5 à 6 mois à partir de février 2027. Web, mobile, 3D : parlons de votre projet.',
+    email: 'clement.lorieau@gmail.com',
+    emailLabel: 'Écrire un message',
+    phone: '07 83 36 89 36',
+    phoneHref: 'tel:+33783368936',
+    website: 'www.clement-lorieau.fr',
+    websiteHref: 'https://www.clement-lorieau.fr',
+  },
+  interests: {
+    label: 'Hors du clavier',
+    items: ['Sport', 'Musique', 'Modélisation et impression 3D'],
+  },
+  footer: 'Conçu et développé par Clément Lorieau',
+}

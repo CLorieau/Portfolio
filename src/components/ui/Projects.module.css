@@ -1,0 +1,340 @@
+/* Section 4 : projets (galerie horizontale epinglee) */
+.projects {
+  position: relative;
+  height: 100svh;
+  min-height: 640px;
+  overflow: hidden;
+}
+
+.header {
+  position: absolute;
+  top: clamp(84px, 12vh, 120px);
+  left: var(--gutter);
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 520px;
+}
+
+.eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.title {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 5vw, 4.4rem);
+  font-weight: 800;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  text-transform: uppercase;
+}
+
+.intro {
+  color: var(--muted);
+}
+
+.track {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  gap: clamp(20px, 3vw, 48px);
+  width: max-content;
+  height: 100%;
+  padding: 0 var(--gutter) clamp(36px, 7vh, 72px) clamp(420px, 38vw, 620px);
+  will-change: transform;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  flex: none;
+  width: clamp(380px, 40vw, 600px);
+  height: min(66vh, 600px);
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-radius: 28px;
+  background: var(--glass);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+  transition:
+    border-color 0.5s ease,
+    box-shadow 0.5s ease;
+}
+
+.card:hover {
+  border-color: rgba(243, 240, 232, 0.32);
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.55);
+}
+
+.visual {
+  position: relative;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+}
+
+.visualInner {
+  position: absolute;
+  inset: -4% -14%;
+  display: grid;
+  place-items: center;
+}
+
+.visual[data-variant='ember'] {
+  --tint-a: #ff6a2b;
+  --tint-b: #7a1d00;
+}
+
+.visual[data-variant='ice'] {
+  --tint-a: #6fe3ff;
+  --tint-b: #05445c;
+}
+
+.visual[data-variant='lime'] {
+  --tint-a: #c6ff3d;
+  --tint-b: #2b4a00;
+}
+
+.visual[data-variant='violet'] {
+  --tint-a: #a78bfa;
+  --tint-b: #2a1370;
+}
+
+.visual::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at 25% 20%, var(--tint-a), transparent 55%),
+    radial-gradient(circle at 80% 90%, var(--tint-b), transparent 60%),
+    #070a14;
+  opacity: 0.9;
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.card:hover .visual::before {
+  transform: scale(1.12);
+}
+
+.orb {
+  position: absolute;
+  width: 46%;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: conic-gradient(from 0deg, var(--tint-a), transparent 40%, var(--tint-b), var(--tint-a));
+  filter: blur(26px);
+  opacity: 0.75;
+  animation: orbit 14s linear infinite;
+}
+
+.ring {
+  position: absolute;
+  width: 62%;
+  aspect-ratio: 1;
+  border: 1px solid rgba(243, 240, 232, 0.28);
+  border-radius: 50%;
+  animation: orbit 22s linear infinite reverse;
+}
+
+.ring::after {
+  content: '';
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--tint-a);
+  box-shadow: 0 0 18px var(--tint-a);
+}
+
+.number {
+  position: relative;
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 11vw, 9rem);
+  font-weight: 800;
+  line-height: 1;
+  color: transparent;
+  -webkit-text-stroke: 1.5px rgba(243, 240, 232, 0.85);
+}
+
+@keyframes orbit {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: clamp(18px, 2vw, 28px);
+  border-top: 1px solid var(--line);
+}
+
+.context {
+  font-family: var(--font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+.cardTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.2rem, 1.9vw, 1.6rem);
+  font-weight: 700;
+  line-height: 1.15;
+}
+
+.cardText {
+  font-size: 0.92rem;
+  color: var(--muted);
+}
+
+.tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.tag {
+  padding: 4px 12px;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  letter-spacing: 0.06em;
+}
+
+.link {
+  align-self: flex-start;
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent-soft);
+  border-bottom: 1px solid currentColor;
+}
+
+.contact {
+  display: flex;
+  flex: none;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: 18px;
+  width: clamp(420px, 52vw, 760px);
+  height: min(66vh, 600px);
+  padding: clamp(24px, 3vw, 44px);
+  border: 1px solid rgba(255, 106, 43, 0.5);
+  border-radius: 28px;
+  background: linear-gradient(160deg, rgba(255, 106, 43, 0.22), var(--glass) 60%);
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+}
+
+.contactTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 3.6vw, 3.4rem);
+  font-weight: 800;
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+}
+
+.contactText {
+  max-width: 480px;
+  color: var(--muted);
+}
+
+.mail {
+  display: inline-flex;
+  flex-direction: column;
+  align-self: flex-start;
+  gap: 2px;
+  padding: 14px 28px;
+  border-radius: 20px;
+  background: var(--accent);
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 500;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #04050a;
+  transition:
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease;
+}
+
+.mail:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 16px 44px rgba(255, 106, 43, 0.45);
+}
+
+.mailAddress {
+  font-size: 0.7rem;
+  letter-spacing: 0.04em;
+  text-transform: none;
+  opacity: 0.75;
+}
+
+.links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+
+.links a:hover {
+  color: var(--fg);
+}
+
+.signature {
+  font-family: var(--font-mono);
+  font-size: 0.66rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--muted);
+  opacity: 0.7;
+}
+
+@media (max-width: 899px) {
+  .projects {
+    height: auto;
+    min-height: 0;
+    padding: clamp(80px, 12vh, 140px) var(--gutter);
+    overflow: visible;
+  }
+
+  .header {
+    position: static;
+    max-width: none;
+    margin-bottom: 32px;
+  }
+
+  .track {
+    flex-direction: column;
+    align-items: stretch;
+    width: auto;
+    height: auto;
+    padding: 0;
+  }
+
+  .card,
+  .contact {
+    width: 100%;
+    height: auto;
+  }
+
+  .visual {
+    flex: none;
+    height: 220px;
+  }
+}

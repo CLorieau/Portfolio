@@ -1,0 +1,5 @@
+/* Contenu DOM au-dessus du canvas persistant */
+.main {
+  position: relative;
+  z-index: 1;
+}

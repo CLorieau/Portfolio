@@ -1,0 +1,13 @@
+/* Canvas global persistant */
+.canvasWrapper {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+
+.vignette {
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at center, transparent 45%, rgba(4, 5, 10, 0.75) 100%);
+}

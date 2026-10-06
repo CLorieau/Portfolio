@@ -1,0 +1,58 @@
+export const journey = {
+  id: 'voyage',
+  eyebrow: '02 / Le voyage',
+  title: 'Le Voyage',
+  hint: 'Continuez à défiler pour suivre le trajet',
+  steps: [
+    {
+      id: 'toulouse',
+      city: 'Toulouse',
+      country: 'France',
+      lat: 43.6047,
+      lon: 1.4442,
+      labelSide: 'left',
+      period: '2022 - 2025',
+      title: "BUT Métiers du Multimédia et de l'Internet",
+      place: 'Université Paul Sabatier',
+      description:
+        "Les bases solides : développement web, design d'interface, audiovisuel et communication. Le point de départ de tout le reste.",
+      tags: ['Web', 'Multimédia', 'UX'],
+    },
+    {
+      id: 'agen',
+      city: 'Agen',
+      country: 'France',
+      lat: 44.2033,
+      lon: 0.6164,
+      labelSide: 'right',
+      period: '2023 - 2025',
+      title: 'Du reportage vidéo à la gestion de projet web',
+      place: 'Périvision Studio puis D2COM',
+      description:
+        "Tournage et post-production chez Périvision Studio, puis application mobile déployée sur les stores en stage chez D2COM, et un an d'alternance comme chef de projet web : applications, plugins WordPress sur mesure, SEO et SEA.",
+      tags: ['Mobile', 'WordPress', 'SEO & SEA', 'Vidéo'],
+    },
+    {
+      id: 'corte',
+      city: 'Corte',
+      country: 'Corse, France',
+      lat: 42.3055,
+      lon: 9.1496,
+      labelSide: 'right',
+      period: '2025 - 2027',
+      title: 'Master Informatique, option Développeur Full Stack',
+      place: 'Université de Corse Pascal Paoli',
+      description:
+        'La montée en puissance : architecture, DevOps et CI/CD, bases de données SQL et NoSQL, gestion de projet agile.',
+      tags: ['Full Stack', 'DevOps', 'Agile'],
+    },
+  ],
+  destination: {
+    period: 'Février 2027',
+    title: 'Prochaine destination',
+    place: "Stage de fin d'études, 5 à 6 mois",
+    description:
+      "Le trajet continue. Je cherche l'équipe avec laquelle poser mes valises pour la dernière étape de mes études.",
+    cta: 'Me contacter',
+  },
+}

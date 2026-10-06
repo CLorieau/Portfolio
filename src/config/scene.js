@@ -1,0 +1,48 @@
+export const scene = {
+  background: '#04050a',
+  accent: '#ff6a2b',
+  accentSoft: '#6fe3ff',
+  globe: {
+    radius: 2,
+    dotCount: 70000,
+    dotSize: 0.013,
+    dotColor: '#9fd8ff',
+    oceanColor: '#070b16',
+    atmosphereColor: '#4cc2ff',
+    routeLift: 0.08,
+    routeLiftFactor: 0.8,
+    groundOffset: 0.012,
+  },
+  camera: {
+    fov: 40,
+    heroDistance: 8,
+    farDistance: 8.6,
+    minFraming: 0.5,
+    maxFraming: 1.5,
+    framingBase: 0.35,
+    framingFactor: 2.2,
+  },
+  hero: {
+    globeY: -3.7,
+    rotationX: 0.1,
+    rotationY: -0.09,
+  },
+  sparkles: {
+    count: 70,
+    size: 2.4,
+    speed: 0.25,
+    color: '#9fdcff',
+  },
+  artifacts: {
+    blob: { position: [3.2, 0.5, -1.5], scale: 1.3, color: '#ff6a2b' },
+    wire: { position: [-3.4, -0.6, -2.5], scale: 1.5, color: '#6fe3ff' },
+    knot: { position: [0.4, -1.8, -0.5], scale: 0.7, color: '#f3f0e8' },
+    shards: [
+      { position: [-2, 1.9, -1], scale: 0.28 },
+      { position: [2.4, -2, -2], scale: 0.22 },
+      { position: [-4.4, 0.4, -3.5], scale: 0.36 },
+      { position: [4.6, 2, -3], scale: 0.3 },
+      { position: [0.8, 2.5, -2.5], scale: 0.18 },
+    ],
+  },
+}

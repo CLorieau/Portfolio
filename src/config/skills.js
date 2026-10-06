@@ -1,0 +1,73 @@
+export const skills = {
+  id: 'competences',
+  eyebrow: '03 / Compétences',
+  title: 'Tech Stack',
+  intro:
+    'Du navigateur au mobile natif, du serveur au pipeline de déploiement : une palette complète pour livrer un produit de bout en bout.',
+  categories: [
+    {
+      id: 'frontend',
+      index: '01',
+      name: 'Front-end',
+      summary: 'Des interfaces rapides, accessibles et soignées.',
+      items: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Angular'],
+    },
+    {
+      id: 'backend',
+      index: '02',
+      name: 'Back-end',
+      summary: 'Des API solides et des architectures maintenables.',
+      items: ['PHP', 'Laravel', 'Symfony', 'Python', 'Java', 'C#', 'API REST'],
+    },
+    {
+      id: 'mobile',
+      index: '03',
+      name: 'Mobile natif',
+      summary: "Des applications publiées sur l'App Store et Google Play.",
+      items: ['React Native', 'Swift', 'Kotlin'],
+    },
+    {
+      id: 'data',
+      index: '04',
+      name: 'Données',
+      summary: 'Modélisation, requêtes et choix du bon stockage.',
+      items: ['SQL', 'NoSQL'],
+    },
+    {
+      id: 'methods',
+      index: '05',
+      name: 'Méthodes & DevOps',
+      summary: "Un cycle de livraison maîtrisé, de l'idée à la production.",
+      items: ['Gestion de projet agile', 'CI/CD', 'WordPress', 'SEO & SEA'],
+    },
+    {
+      id: 'creative',
+      index: '06',
+      name: 'Création & 3D',
+      summary: "Le goût du visuel, de la vidéo à l'impression 3D.",
+      items: ['Three.js', 'GSAP', 'Modélisation 3D', 'Impression 3D', 'Montage vidéo'],
+    },
+  ],
+  languages: {
+    label: 'Langues',
+    items: [
+      { name: 'Français', level: 'Langue maternelle' },
+      { name: 'Anglais', level: 'Courant' },
+      { name: 'Espagnol', level: 'Intermédiaire' },
+    ],
+  },
+  marquee: [
+    'React',
+    'Next.js',
+    'Laravel',
+    'Symfony',
+    'React Native',
+    'Swift',
+    'Kotlin',
+    'Python',
+    'Java',
+    'Angular',
+    'Three.js',
+    'GSAP',
+  ],
+}
