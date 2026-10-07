@@ -68,7 +68,9 @@ export function sampleJourney(progress) {
   const time = progress * journeyCards
   const k = MathUtils.clamp(time - 0.5, 0, waypointCount - 1)
   const index = Math.min(Math.floor(k), waypointCount - 2)
-  const blend = smoothstep(0.3, 0.7, k - index)
+  // Fenêtre de scroll pendant laquelle on se déplace : l'avion parcourt une plus longue distance, on la lui étale.
+  const [from, to] = journey.steps[index + 1].transport === 'air' ? [0.06, 0.94] : [0.3, 0.7]
+  const blend = smoothstep(from, to, k - index)
 
   journeyRuntime.t = (index + blend) / (waypointCount - 1)
   journeyRuntime.index = index
