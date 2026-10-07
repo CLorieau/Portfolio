@@ -22,16 +22,16 @@ function useWingGeometry(points) {
 }
 
 const mainWing = [
-  [0.12, -0.3],
-  [1.45, 0.42],
-  [1.45, 0.7],
-  [0.12, 0.2],
+  [0.15, -0.3],
+  [1.5, 0.45],
+  [1.5, 0.7],
+  [0.15, 0.35],
 ]
 const tailWing = [
-  [0.08, -0.22],
-  [0.62, 0.12],
-  [0.62, 0.3],
-  [0.08, 0.16],
+  [0.1, -0.22],
+  [0.72, 0.06],
+  [0.72, 0.24],
+  [0.1, 0.16],
 ]
 
 function Wing({ points, thickness, ...props }) {
@@ -91,62 +91,70 @@ function Car() {
   )
 }
 
+const windows = Array.from({ length: 12 }, (_, index) => -0.5 + index * 0.1)
+
 function Airliner() {
   return (
-    <group position={[0, 0.16, 0]}>
-      {/* Fuselage */}
+    <group position={[0, 0.2, 0]}>
+      {/* Fuselage : tube, nez arrondi, cône de queue relevé */}
       <mesh position={[0, 0, 0.1]} rotation={[Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.14, 0.14, 1.7, 24]} />
-        <meshStandardMaterial color={WHITE} metalness={0.25} roughness={0.3} />
+        <cylinderGeometry args={[0.17, 0.17, 1.4, 28]} />
+        <meshStandardMaterial color={WHITE} metalness={0.15} roughness={0.35} />
       </mesh>
-      <mesh position={[0, 0, 1.2]} rotation={[Math.PI / 2, 0, 0]}>
-        <coneGeometry args={[0.14, 0.55, 24]} />
-        <meshStandardMaterial color={WHITE} metalness={0.25} roughness={0.3} />
+      <mesh position={[0, 0, 0.8]} scale={[1, 1, 1.7]}>
+        <sphereGeometry args={[0.17, 28, 20]} />
+        <meshStandardMaterial color={WHITE} metalness={0.15} roughness={0.35} />
       </mesh>
-      <mesh position={[0, 0.03, -1.25]} rotation={[-Math.PI / 2 + 0.12, 0, 0]}>
-        <coneGeometry args={[0.14, 0.9, 24]} />
-        <meshStandardMaterial color={WHITE} metalness={0.25} roughness={0.3} />
-      </mesh>
-      {/* Bande de cabine et cockpit */}
-      <mesh position={[0, 0, 0.1]} rotation={[Math.PI / 2, 0, 0]}>
-        <cylinderGeometry args={[0.142, 0.142, 1.3, 24]} />
-        <meshStandardMaterial color={scene.accent} metalness={0.3} roughness={0.4} />
-      </mesh>
-      <mesh position={[0, 0.07, 1.0]} rotation={[0.45, 0, 0]}>
-        <boxGeometry args={[0.2, 0.05, 0.14]} />
-        <meshStandardMaterial color={GLASS} metalness={0.6} roughness={0.15} />
+      <mesh position={[0, 0.07, -1.07]} rotation={[-Math.PI / 2 + 0.14, 0, 0]}>
+        <cylinderGeometry args={[0.04, 0.17, 0.95, 28]} />
+        <meshStandardMaterial color={WHITE} metalness={0.15} roughness={0.35} />
       </mesh>
 
-      {/* Ailes basses en flèche */}
-      <Wing points={mainWing} thickness={0.035} position={[0, -0.1, 0.25]} />
-      {/* Réacteurs */}
-      {[-0.55, 0.55].map((x) => (
-        <group key={x} position={[x, -0.2, 0.28]}>
-          <mesh rotation={[Math.PI / 2, 0, 0]}>
-            <cylinderGeometry args={[0.09, 0.09, 0.42, 16]} />
-            <meshStandardMaterial color="#d9d6ce" metalness={0.5} roughness={0.3} />
+      {/* Cockpit et hublots */}
+      <mesh position={[0, 0.1, 0.93]} rotation={[-0.6, 0, 0]}>
+        <boxGeometry args={[0.24, 0.045, 0.1]} />
+        <meshStandardMaterial color={GLASS} metalness={0.6} roughness={0.15} />
+      </mesh>
+      {[-1, 1].map((side) =>
+        windows.map((z) => (
+          <mesh key={`${side}${z}`} position={[side * 0.171, 0.05, z]}>
+            <boxGeometry args={[0.012, 0.045, 0.055]} />
+            <meshStandardMaterial color={GLASS} metalness={0.5} roughness={0.2} />
           </mesh>
-          <mesh position={[0, 0, 0.215]} rotation={[Math.PI / 2, 0, 0]}>
-            <cylinderGeometry args={[0.065, 0.065, 0.02, 16]} />
-            <meshBasicMaterial color={GLASS} />
+        )),
+      )}
+
+      {/* Ailes basses en flèche */}
+      <Wing points={mainWing} thickness={0.05} position={[0, -0.11, 0.12]} />
+
+      {/* Réacteurs sous les ailes */}
+      {[-0.62, 0.62].map((x) => (
+        <group key={x} position={[x, -0.27, 0.3]}>
+          <mesh rotation={[Math.PI / 2, 0, 0]}>
+            <cylinderGeometry args={[0.12, 0.11, 0.55, 20]} />
+            <meshStandardMaterial color="#cfccc4" metalness={0.5} roughness={0.3} />
+          </mesh>
+          <mesh position={[0, 0, 0.28]} rotation={[Math.PI / 2, 0, 0]}>
+            <cylinderGeometry args={[0.085, 0.085, 0.02, 20]} />
+            <meshBasicMaterial color="#05070c" />
           </mesh>
         </group>
       ))}
 
-      {/* Empennage */}
-      <Wing points={tailWing} thickness={0.025} position={[0, 0.02, -1.0]} />
-      <mesh position={[0, 0.34, -1.12]} rotation={[-0.5, 0, 0]}>
-        <boxGeometry args={[0.035, 0.55, 0.36]} />
+      {/* Empennage : stabilisateurs et dérive aux couleurs du site */}
+      <Wing points={tailWing} thickness={0.03} position={[0, 0.1, -1.05]} />
+      <mesh position={[0, 0.42, -1.08]} rotation={[-0.55, 0, 0]}>
+        <boxGeometry args={[0.04, 0.68, 0.5]} />
         <meshStandardMaterial color={scene.accent} metalness={0.3} roughness={0.4} />
       </mesh>
 
-      {/* Feux de navigation */}
-      <mesh position={[-1.45, -0.08, -0.3]}>
-        <sphereGeometry args={[0.04, 8, 8]} />
+      {/* Feux de navigation en bout d'aile */}
+      <mesh position={[-1.5, -0.09, -0.32]}>
+        <sphereGeometry args={[0.035, 8, 8]} />
         <meshBasicMaterial color="#ff2a2a" toneMapped={false} />
       </mesh>
-      <mesh position={[1.45, -0.08, -0.3]}>
-        <sphereGeometry args={[0.04, 8, 8]} />
+      <mesh position={[1.5, -0.09, -0.32]}>
+        <sphereGeometry args={[0.035, 8, 8]} />
         <meshBasicMaterial color="#35ff7a" toneMapped={false} />
       </mesh>
     </group>
@@ -168,7 +176,7 @@ export default function Vehicle({ ref }) {
       <group ref={carRef} scale={0.05}>
         <Car />
       </group>
-      <group ref={planeRef} scale={0.04}>
+      <group ref={planeRef} scale={0.045}>
         <Airliner />
       </group>
     </group>
