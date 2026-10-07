@@ -3,7 +3,7 @@ import { journey } from '@/config/journey'
 import { scene } from '@/config/scene'
 import { latLonToVector, smoothstep, vectorToLatLon } from '@/lib/geo'
 
-const { radius, groundOffset, routeLift, routeLiftFactor } = scene.globe
+const { radius, groundOffset, routeLift, routeLiftFactor, roadLift } = scene.globe
 const { minFraming, maxFraming, framingBase, framingFactor } = scene.camera
 
 const anchors = journey.steps.map((step) =>
@@ -16,11 +16,14 @@ anchors.forEach((anchor, index) => {
   const next = anchors[index + 1]
   if (next) {
     const chord = anchor.distanceTo(next)
+    // Route : on reste au ras du sol. Avion : arc de croisière.
+    const lift =
+      journey.steps[index + 1].transport === 'road' ? roadLift : routeLift + chord * routeLiftFactor
     const apex = anchor
       .clone()
       .add(next)
       .normalize()
-      .multiplyScalar(radius + groundOffset + routeLift + chord * routeLiftFactor)
+      .multiplyScalar(radius + groundOffset + lift)
     controlPoints.push(apex)
   }
 })
@@ -32,6 +35,12 @@ export const journeyPoints = journeyCurve.getPoints(journeySegments)
 export const journeyCards = journey.steps.length + 1
 
 const waypointCount = anchors.length
+
+// Moyen de transport utilisé à la position t (0..1) du trajet.
+export function transportAt(t) {
+  const leg = Math.min(Math.floor(t * (waypointCount - 1)), waypointCount - 2)
+  return journey.steps[leg + 1].transport
+}
 const legChords = anchors.slice(1).map((anchor, index) => anchor.distanceTo(anchors[index]))
 const legFraming = legChords.map((chord) =>
   MathUtils.clamp(framingBase + chord * framingFactor, minFraming, maxFraming),

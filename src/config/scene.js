@@ -11,6 +11,7 @@ export const scene = {
     atmosphereColor: '#4cc2ff',
     routeLift: 0.08,
     routeLiftFactor: 0.8,
+    roadLift: 0.006,
     groundOffset: 0.012,
   },
   camera: {

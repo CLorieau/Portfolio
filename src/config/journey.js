@@ -20,6 +20,7 @@ export const journey = {
     },
     {
       id: 'agen',
+      transport: 'road',
       city: 'Agen',
       country: 'France',
       lat: 44.2033,
@@ -34,6 +35,7 @@ export const journey = {
     },
     {
       id: 'corte',
+      transport: 'air',
       city: 'Corte',
       country: 'Corse, France',
       lat: 42.3055,
