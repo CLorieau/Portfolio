@@ -10,7 +10,7 @@ import { journeyPoints, journeyRuntime, journeySegments, poseOnJourney } from '@
 import Marker from './Marker'
 import Vehicle from './Vehicle'
 
-export default function JourneyRoute({ occluder }) {
+export default function JourneyRoute() {
   const sceneReady = useSceneStore((state) => state.sceneReady)
   const trailRef = useRef(null)
   const vehicleRef = useRef(null)
@@ -40,7 +40,7 @@ export default function JourneyRoute({ occluder }) {
       <Line ref={trailRef} points={journeyPoints} color={scene.accent} lineWidth={2.6} />
       {sceneReady &&
         journey.steps.map((step, index) => (
-          <Marker key={step.id} step={step} index={index} occluder={occluder} />
+          <Marker key={step.id} step={step} index={index} />
         ))}
       <Vehicle ref={vehicleRef} />
     </group>

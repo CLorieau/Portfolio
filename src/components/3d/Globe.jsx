@@ -33,7 +33,7 @@ const atmosphereUniforms = {
   uColor: { value: new Color(atmosphereColor).toArray() },
 }
 
-export default function Globe({ oceanRef, children }) {
+export default function Globe({ children }) {
   const [positions, setPositions] = useState(null)
   const setSceneReady = useSceneStore((state) => state.setSceneReady)
   const dotsRef = useRef(null)
@@ -59,7 +59,7 @@ export default function Globe({ oceanRef, children }) {
 
   return (
     <group>
-      <mesh ref={oceanRef}>
+      <mesh>
         <sphereGeometry args={[radius * 0.995, 48, 48]} />
         <shaderMaterial
           args={[{ uniforms: oceanUniforms, vertexShader: oceanVertex, fragmentShader: oceanFragment }]}

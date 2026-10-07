@@ -18,7 +18,6 @@ const tanHalfFov = Math.tan((fov * Math.PI) / 360)
 
 export default function World() {
   const globeRef = useRef(null)
-  const oceanRef = useRef(null)
   const artifactsRef = useRef(null)
 
   useFrame((state, delta) => {
@@ -102,8 +101,8 @@ export default function World() {
       />
 
       <group ref={globeRef}>
-        <Globe oceanRef={oceanRef}>
-          <JourneyRoute occluder={oceanRef} />
+        <Globe>
+          <JourneyRoute />
         </Globe>
       </group>
 
