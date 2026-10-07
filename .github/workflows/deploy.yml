@@ -29,9 +29,16 @@ jobs:
           SSH_HOST: ${{ secrets.SSH_HOST }}
           SSH_PORT: ${{ secrets.SSH_PORT }}
         run: |
-          mkdir -p ~/.ssh
-          echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
+          set -euo pipefail
+          : "${SSH_HOST:?Le secret SSH_HOST est manquant}"
+          : "${SSH_PRIVATE_KEY:?Le secret SSH_PRIVATE_KEY est manquant}"
+          install -d -m 700 ~/.ssh
+          printf '%s\n' "$SSH_PRIVATE_KEY" | tr -d '\r' > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
+          if ! ssh-keygen -y -P '' -f ~/.ssh/id_ed25519 > /dev/null 2>&1; then
+            echo '::error::SSH_PRIVATE_KEY doit contenir une clé privée complète, sans passphrase, avec les lignes BEGIN et END. Une clé publique ne convient pas.'
+            exit 1
+          fi
           ssh-keyscan -p "${SSH_PORT:-22}" -H "$SSH_HOST" >> ~/.ssh/known_hosts
 
       - name: Upload site
@@ -41,6 +48,14 @@ jobs:
           SSH_PORT: ${{ secrets.SSH_PORT }}
           DEPLOY_PATH: ${{ secrets.DEPLOY_PATH }}
         run: |
+          set -euo pipefail
+          : "${SSH_USER:?Le secret SSH_USER est manquant}"
+          : "${SSH_HOST:?Le secret SSH_HOST est manquant}"
+          : "${DEPLOY_PATH:?Le secret DEPLOY_PATH est manquant}"
+          if [[ "$DEPLOY_PATH" != /* || "$DEPLOY_PATH" =~ ^/+$ ]]; then
+            echo '::error::DEPLOY_PATH doit être un chemin absolu vers le dossier du site, différent de /.'
+            exit 1
+          fi
           rsync -az --delete \
-            -e "ssh -p ${SSH_PORT:-22} -i ~/.ssh/id_ed25519" \
+            -e "ssh -p ${SSH_PORT:-22} -i ~/.ssh/id_ed25519 -o BatchMode=yes -o IdentitiesOnly=yes -o StrictHostKeyChecking=yes" \
             out/ "$SSH_USER@$SSH_HOST:$DEPLOY_PATH/"
