@@ -33,7 +33,9 @@ export default function World() {
     const leave = smoothstep(0, 1, scrollState.skills)
     const sample = sampleJourney(scrollState.journey)
 
-    const journeyDistance = radius + sample.framing
+    // En portrait la largeur visible est réduite : on recule pour garder le trajet et les étiquettes à l'écran.
+    const portraitZoom = MathUtils.clamp(0.9 / aspect, 1, 1.9)
+    const journeyDistance = radius + sample.framing * portraitZoom
     const targetZ = MathUtils.lerp(
       MathUtils.lerp(heroDistance, journeyDistance, enter),
       farDistance,
@@ -46,7 +48,8 @@ export default function World() {
 
     const viewHeight = 2 * tanHalfFov * Math.max(camera.position.z - radius, 0.1)
     const shiftX = wide ? viewHeight * aspect * 0.17 : 0
-    const shiftY = wide ? 0 : viewHeight * 0.16
+    // Portrait : le globe occupe la bande libre entre le titre et la carte de texte, en bas.
+    const shiftY = wide ? 0 : viewHeight * 0.205
     const targetX = shiftX * enter * (1 - leave)
     const targetY = MathUtils.lerp(scene.hero.globeY, shiftY, enter) - leave * 9
 

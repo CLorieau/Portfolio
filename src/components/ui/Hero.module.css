@@ -109,6 +109,10 @@
 }
 
 @media (max-width: 760px) {
+  .title {
+    font-size: min(9.2vw, 3.2rem);
+  }
+
   .meta {
     grid-template-columns: 1fr;
     justify-items: center;
