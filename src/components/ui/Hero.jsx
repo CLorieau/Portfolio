@@ -1,12 +1,13 @@
 'use client'
 
 import { useRef } from 'react'
-import { site } from '@/config/site'
+import { useContent } from '@/lib/i18n'
 import { gsap, ScrollTrigger, SplitText, useGSAP } from '@/lib/gsap'
 import { scrollState, useSceneStore } from '@/lib/scrollState'
 import styles from './Hero.module.css'
 
 export default function Hero() {
+  const { site } = useContent()
   const introDone = useSceneStore((state) => state.introDone)
   const setActiveSection = useSceneStore((state) => state.setActiveSection)
   const sectionRef = useRef(null)

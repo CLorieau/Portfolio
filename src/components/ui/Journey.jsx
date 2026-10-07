@@ -1,18 +1,17 @@
 'use client'
 
 import { useRef } from 'react'
-import { journey } from '@/config/journey'
-import { site } from '@/config/site'
+import { useContent } from '@/lib/i18n'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { scrollState, useSceneStore } from '@/lib/scrollState'
 import styles from './Journey.module.css'
 
-const cards = [
-  ...journey.steps.map((step) => ({ ...step, kind: 'step' })),
-  { ...journey.destination, id: 'destination', kind: 'destination' },
-]
-
 export default function Journey() {
+  const { site, journey } = useContent()
+  const cards = [
+    ...journey.steps.map((step) => ({ ...step, kind: 'step' })),
+    { ...journey.destination, id: 'destination', kind: 'destination' },
+  ]
   const setActiveSection = useSceneStore((state) => state.setActiveSection)
   const sectionRef = useRef(null)
 

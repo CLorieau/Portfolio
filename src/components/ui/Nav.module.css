@@ -61,6 +61,12 @@
   opacity: 1;
 }
 
+.actions {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
 .contact {
   padding: 9px 20px;
   border: 1px solid currentColor;

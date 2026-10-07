@@ -2,9 +2,10 @@
 
 import { useRef } from 'react'
 import Image from 'next/image'
-import { site } from '@/config/site'
+import { useContent } from '@/lib/i18n'
 import { gsap, ScrollTrigger, useGSAP } from '@/lib/gsap'
 import { scroller, useSceneStore } from '@/lib/scrollState'
+import LanguageSwitch from './LanguageSwitch'
 import styles from './Nav.module.css'
 
 function goTo(id) {
@@ -20,6 +21,7 @@ function goTo(id) {
 }
 
 export default function Nav() {
+  const { site } = useContent()
   const activeSection = useSceneStore((state) => state.activeSection)
   const introDone = useSceneStore((state) => state.introDone)
   const rootRef = useRef(null)
@@ -61,7 +63,7 @@ export default function Nav() {
         <span className={styles.brandName}>{site.name}</span>
       </button>
 
-      <nav className={styles.links} aria-label="Navigation principale">
+      <nav className={styles.links} aria-label={site.navAria}>
         {site.nav.map((item) => (
           <button
             key={item.id}
@@ -77,9 +79,12 @@ export default function Nav() {
         ))}
       </nav>
 
-      <a className={styles.contact} href={`mailto:${site.contact.email}`} data-cursor>
-        Contact
-      </a>
+      <div className={styles.actions}>
+        <a className={styles.contact} href={`mailto:${site.contact.email}`} data-cursor>
+          {site.contactLabel}
+        </a>
+        <LanguageSwitch />
+      </div>
 
       <div className={styles.progress}>
         <div ref={barRef} className={styles.progressBar} />

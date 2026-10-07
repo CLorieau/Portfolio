@@ -1,12 +1,13 @@
 'use client'
 
 import { useRef } from 'react'
-import { site } from '@/config/site'
+import { getContent, useContent } from '@/lib/i18n'
 import { gsap, useGSAP } from '@/lib/gsap'
 import { useSceneStore } from '@/lib/scrollState'
 import styles from './Loader.module.css'
 
 export default function Loader() {
+  const { site } = useContent()
   const sceneReady = useSceneStore((state) => state.sceneReady)
   const setIntroDone = useSceneStore((state) => state.setIntroDone)
   const rootRef = useRef(null)
@@ -33,7 +34,7 @@ export default function Loader() {
         .timeline()
         .to(progress, { value: 100, duration: 0.6, ease: 'power2.inOut', onUpdate: render })
         .add(() => {
-          labelRef.current.textContent = site.loader.done
+          labelRef.current.textContent = getContent().site.loader.done
         })
         .to(contentRef.current, { autoAlpha: 0, y: -24, duration: 0.5, ease: 'power2.in' }, '+=0.35')
         .add(() => setIntroDone(), '>-0.1')

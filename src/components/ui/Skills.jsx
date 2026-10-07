@@ -1,18 +1,19 @@
 'use client'
 
 import { useRef } from 'react'
-import { skills } from '@/config/skills'
-import { site } from '@/config/site'
+import { skills as baseSkills } from '@/config/skills'
+import { useContent } from '@/lib/i18n'
 import { gsap, ScrollTrigger, SplitText, useGSAP } from '@/lib/gsap'
 import { scrollState, useSceneStore } from '@/lib/scrollState'
 import styles from './Skills.module.css'
 
 const marqueeRows = [
-  { id: 'forward', words: [...skills.marquee, ...skills.marquee], from: 0, to: -28 },
-  { id: 'backward', words: [...skills.marquee, ...skills.marquee].reverse(), from: -28, to: 0 },
+  { id: 'forward', words: [...baseSkills.marquee, ...baseSkills.marquee], from: 0, to: -28 },
+  { id: 'backward', words: [...baseSkills.marquee, ...baseSkills.marquee].reverse(), from: -28, to: 0 },
 ]
 
 export default function Skills() {
+  const { site, skills } = useContent()
   const setActiveSection = useSceneStore((state) => state.setActiveSection)
   const sectionRef = useRef(null)
   const titleRef = useRef(null)

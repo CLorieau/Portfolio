@@ -13,6 +13,9 @@ export const site = {
     label: 'Chargement du globe',
     done: 'Prêt',
   },
+  navAria: 'Navigation principale',
+  contactLabel: 'Contact',
+  languageSwitchLabel: 'Switch the site to English',
   nav: [
     { id: 'accueil', label: 'Accueil', index: '01' },
     { id: 'voyage', label: 'Voyage', index: '02' },

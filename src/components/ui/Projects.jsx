@@ -1,13 +1,13 @@
 'use client'
 
 import { useRef } from 'react'
-import { projects } from '@/config/projects'
-import { site } from '@/config/site'
+import { useContent } from '@/lib/i18n'
 import { gsap, ScrollTrigger, useGSAP } from '@/lib/gsap'
 import { scrollState, useSceneStore } from '@/lib/scrollState'
 import styles from './Projects.module.css'
 
 export default function Projects() {
+  const { site, projects } = useContent()
   const setActiveSection = useSceneStore((state) => state.setActiveSection)
   const sectionRef = useRef(null)
   const trackRef = useRef(null)
