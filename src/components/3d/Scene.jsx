@@ -4,12 +4,13 @@ import { Suspense } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Environment, Lightformer } from '@react-three/drei'
 import { scene } from '@/config/scene'
+import { labelPortal } from '@/lib/scrollState'
 import World from './World'
 import styles from './Scene.module.css'
 
 export default function Scene() {
   return (
-    <div className={styles.canvasWrapper}>
+    <div ref={(element) => (labelPortal.current = element)} className={styles.canvasWrapper}>
       <Canvas
         dpr={[1, 1.5]}
         camera={{

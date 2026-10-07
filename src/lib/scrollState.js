@@ -11,6 +11,11 @@ export const scroller = {
   lenis: null,
 }
 
+// Conteneur fixe du canvas : les étiquettes HTML des marqueurs y sont rattachées (et non à <html>, qui défile).
+export const labelPortal = {
+  current: null,
+}
+
 export const useSceneStore = create((set) => ({
   sceneReady: false,
   introDone: false,
