@@ -1,29 +1,45 @@
 'use client'
 
-import { Suspense } from 'react'
+import { Suspense, useState } from 'react'
 import { Canvas } from '@react-three/fiber'
 import { Environment, Lightformer } from '@react-three/drei'
 import { scene } from '@/config/scene'
 import { labelPortal } from '@/lib/scrollState'
+import { detectSoftwareRenderer, forcedQuality, quality } from '@/lib/quality'
+import RenderGovernor from './RenderGovernor'
 import World from './World'
 import styles from './Scene.module.css'
 
 export default function Scene() {
+  const [low, setLow] = useState(() => {
+    const forced = forcedQuality()
+    quality.forced = Boolean(forced)
+    quality.low = forced ? forced === 'low' : detectSoftwareRenderer()
+    return quality.low
+  })
+
+  const handleSlow = () => {
+    quality.low = true
+    setLow(true)
+  }
+
   return (
     <div ref={(element) => (labelPortal.current = element)} className={styles.canvasWrapper}>
       <Canvas
-        dpr={[1, 1.5]}
+        dpr={low ? 1 : [1, 1.5]}
+        frameloop={low ? 'demand' : 'always'}
         camera={{
           fov: scene.camera.fov,
           near: 0.05,
           far: 60,
           position: [0, 0, scene.camera.heroDistance],
         }}
-        gl={{ antialias: true, powerPreference: 'high-performance' }}
+        gl={{ antialias: !quality.low, powerPreference: 'high-performance' }}
         eventSource={document.documentElement}
         eventPrefix="client"
       >
         <color attach="background" args={[scene.background]} />
+        <RenderGovernor low={low} onSlow={handleSlow} />
         <Suspense fallback={null}>
           <World />
         </Suspense>

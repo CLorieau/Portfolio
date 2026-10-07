@@ -5,6 +5,7 @@ import { useFrame } from '@react-three/fiber'
 import { AdditiveBlending, BackSide, Color } from 'three'
 import { scene } from '@/config/scene'
 import { buildLandDots } from '@/lib/geo'
+import { quality } from '@/lib/quality'
 import { useSceneStore } from '@/lib/scrollState'
 import {
   atmosphereFragment,
@@ -40,7 +41,7 @@ export default function Globe({ children }) {
 
   useEffect(() => {
     let cancelled = false
-    buildLandDots(dotCount, radius).then((data) => {
+    buildLandDots(quality.low ? Math.round(dotCount / 2) : dotCount, radius).then((data) => {
       if (cancelled) return
       setPositions(data)
       setSceneReady()

@@ -3,6 +3,7 @@
 import { useEffect } from 'react'
 import Lenis from 'lenis'
 import { gsap, ScrollTrigger } from '@/lib/gsap'
+import { wake } from '@/lib/renderActivity'
 import { scroller, useSceneStore } from '@/lib/scrollState'
 
 export default function SmoothScroll() {
@@ -17,6 +18,7 @@ export default function SmoothScroll() {
     scroller.lenis = lenis
 
     lenis.on('scroll', ScrollTrigger.update)
+    lenis.on('scroll', () => wake())
     const tick = (time) => lenis.raf(time * 1000)
     gsap.ticker.add(tick)
     gsap.ticker.lagSmoothing(0)
